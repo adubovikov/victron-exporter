@@ -1,0 +1,17 @@
+# cp victron-exporter.service /etc/systemd/system/
+# systemctl daemon-reload
+# systemctl start victron-exporter
+# systemctl enable victron-exporter
+
+[Unit]
+Description=Victron Exporter Server
+After=network.target
+
+[Service]
+Environment="VICTRON_CONFIG=-mqtt.host IP -log.level=2"
+ExecStart=/usr/local/bin/victron-exporter $VICTRON_CONFIG
+Restart=always
+RestartSec=3s
+Type=simple
+
+[Install]
